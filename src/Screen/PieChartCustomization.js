@@ -1,63 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, ImageBackground, ScrollView } from 'react-native';
 import moment from 'moment';
-import { MONTHS } from '../model/months';
-import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';
-import PieChart from '../pie-chart/PieChart'
+import { MONTHS } from '../components/model/MonthsAndYears';
+import { JANUARY } from '../components/model/MonthsAndYears';
+import RNPickerSelect from 'react-native-picker-select';
+import PieChart from '../components/pie-chart/PieChart'
 import { Icon } from 'react-native-elements';
-
+import CardList from '../components/CardList'
 
 const IMAGE_FUNDO_GRAFICO = require('../../assets/fundoGrafico.png');
 
 const placeholderMes = {
-    label: 'Meses...',
+    label: 'Months...',
     value: null,
     color: '#9EA0A4',
 };
 
 const placeholderAnos = {
-    label: 'Anos...',
+    label: 'Years...',
     value: null,
     color: '#9EA0A4',
 };
-
-
-const January = [
-    {
-        // data : [
-        //     {rowNum: 1, dataBaixa: "22/01/2020", meta: "200", qtdContratos: 3, qtdPontos: 5},
-        //     {rowNum: 2, dataBaixa: "23/01/2020", meta: "200", qtdContratos: 5, qtdPontos: 8},
-        //     {rowNum: 3, dataBaixa: "24/01/2020", meta: "200", qtdContratos: 4, qtdPontos: 5},
-        //     {rowNum: 4, dataBaixa: "25/01/2020", meta: "200", qtdContratos: 6, qtdPontos: 9},
-        //     {rowNum: 5, dataBaixa: "27/01/2020", meta: "200", qtdContratos: 5, qtdPontos: 6},
-        //     {rowNum: 6, dataBaixa: "28/01/2020", meta: "200", qtdContratos: 3, qtdPontos: 7},
-        //     {rowNum: 7, dataBaixa: "29/01/2020", meta: "200", qtdContratos: 7, qtdPontos: 8}
-        // ],
-        rowNum: 1,
-        mediaDiaria: 6.44,
-        meta: 1,
-        percentual: 80,
-        pontos: 161,
-        qtdContratos: 2,
-        qtdPontos: 3,
-        restantes: 39,
-        total: 200,
-    },
-    {
-        rowNum: 2,
-        mediaDiaria: 9.44,
-        meta: 2,
-        percentual: 90,
-        pontos: 161,
-        qtdContratos: 2,
-        qtdPontos: 3,
-        restantes: 40,
-        total: 200,
-
-    }
-]
-
 
 export default function PieChartCustomization() {
 
@@ -94,44 +57,19 @@ export default function PieChartCustomization() {
     }
 
     const listRender = () => {
-        var check = false;
         var result = null;
-        result = January.map((item, index) => {
-            check = !check;
+        result = JANUARY.map((item, index) => {
             return (
-                <View key={item.rowNum} style={{ flexDirection: 'row', backgroundColor: check ? 'white' : '#ECECEC' }}>
-                    <View style={{ flex: 0.3, justifyContent: 'center' }}>
-                        <View style={{ alignItems: 'center', }}>
-                            <Text style={{ fontSize: 16, color: 'gray', fontWeight: 'bold', }}>
-                                {item.dataBaixa}
-                            </Text>
-                        </View>
-                    </View>
-                    <View style={{ flex: 0.4, marginLeft: 10, justifyContent: 'center' }}>
-                        <View style={{ alignItems: 'center', }}>
-                            <Text style={{ fontSize: 16, color: 'gray', fontWeight: 'bold', }} >
-                                {item.qtdContratos}
-                            </Text>
-                        </View>
-                    </View>
-                    <View style={{ flex: 0.3, justifyContent: 'center', }}>
-                        <View style={{ alignItems: 'center', marginRight: 10 }}>
-                            <Text style={{ fontSize: 16, color: 'gray', fontWeight: 'bold', }} >
-                                {item.qtdPontos}
-                            </Text>
-                        </View>
-                    </View>
-                </View>
+                <CardList props={item} key={item.rowNum} />
             )
         });
         return result;
     }
 
-
     return (
         <View style={styles.container}>
             <ScrollView>
-                <View style={{ marginTop: 60, alignItems: 'center', backgroundColor: 'transparent', marginHorizontal: 10, borderRadius: 10, flexDirection: 'row', }} >
+                <View style={{ marginTop: 80, alignItems: 'center', backgroundColor: 'transparent', marginHorizontal: 10, borderRadius: 10, flexDirection: 'row', }} >
                     <View style={{ flexDirection: 'row', }}>
                         <ImageBackground style={{ flex: 1, flexDirection: 'row', }} imageStyle={{ borderRadius: 10 }} source={IMAGE_FUNDO_GRAFICO} >
                             <View style={{ flex: 0.2, justifyContent: 'space-around', }}>
@@ -191,7 +129,7 @@ export default function PieChartCustomization() {
                     </View>
                 </View>
 
-                <View style={{ justifyContent: 'center', alignItems: 'center', borderRadius: 0, marginHorizontal: 10 }} >
+                <View style={{ justifyContent: 'center', alignItems: 'center', borderRadius: 0, marginHorizontal: 10, marginTop: 40 }} >
                     <View style={{ flexDirection: 'row', backgroundColor: 'transparent' }}>
                         <View style={{ flex: 0.2, justifyContent: 'center' }}>
                             <View style={{ alignItems: 'center', }}>
@@ -203,7 +141,7 @@ export default function PieChartCustomization() {
 
                         <View style={{ flex: 0.4, marginLeft: 10, justifyContent: 'center' }}>
                             <View style={{ alignItems: 'flex-start', }}>
-                                <Text style={{ fontSize: 15, marginTop: 10, marginLeft: 12, color: 'gray', fontWeight: 'bold' }}>MÊS</Text>
+                                <Text style={{ fontSize: 15, marginTop: 10, marginLeft: 12, color: 'gray', fontWeight: 'bold' }}>MONTHS</Text>
                                 <RNPickerSelect
                                     placeholder={placeholderMes}
                                     items={listaMesesCombo}
@@ -221,7 +159,7 @@ export default function PieChartCustomization() {
 
                         <View style={{ flex: 0.4, justifyContent: 'center', }}>
                             <View style={{ alignItems: 'flex-start', marginRight: 10 }}>
-                                <Text style={{ fontSize: 15, marginTop: 10, marginLeft: 12, color: 'gray', fontWeight: 'bold' }}>ANO</Text>
+                                <Text style={{ fontSize: 15, marginTop: 10, marginLeft: 12, color: 'gray', fontWeight: 'bold' }}>YEARS</Text>
                                 <RNPickerSelect
                                     placeholder={placeholderAnos}
                                     items={years}
@@ -258,21 +196,21 @@ export default function PieChartCustomization() {
                         <View style={{ flex: 0.3, justifyContent: 'center' }}>
                             <View style={{ alignItems: 'center', }}>
                                 <Text style={{ fontSize: 17, color: 'white', fontWeight: 'bold', }}>
-                                    Data
+                                    Date
                                 </Text>
                             </View>
                         </View>
                         <View style={{ flex: 0.4, marginLeft: 10, justifyContent: 'center' }}>
                             <View style={{ alignItems: 'center', }}>
                                 <Text style={{ fontSize: 17, color: 'white', fontWeight: 'bold', }} >
-                                    Contratos
+                                    Contracts
                                 </Text>
                             </View>
                         </View>
                         <View style={{ flex: 0.3, justifyContent: 'center', }}>
                             <View style={{ alignItems: 'center', marginRight: 10 }}>
                                 <Text style={{ fontSize: 17, color: 'white', fontWeight: 'bold', }} >
-                                    Produção
+                                    Production
                                 </Text>
                             </View>
                         </View>
