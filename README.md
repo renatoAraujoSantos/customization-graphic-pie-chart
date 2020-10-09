@@ -1,2 +1,2 @@
 # customization-graphic-pie-chart
-![Demo Animation](./assets/graficPieChartCustomization.png?raw=true){:height="50%" width="50%"}
+![smiley](./assets/smiley.png){:height="36px" width="36px"}
