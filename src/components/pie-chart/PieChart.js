@@ -1,64 +1,41 @@
 import React from 'react';
 import { PieChart } from 'react-native-svg-charts';
 import { Text } from 'react-native-svg';
-import { Text as TextR, View, Dimensions } from 'react-native';
+import { Text as TextR, View } from 'react-native';
 
 class PieCharScreen extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.state = {
-          selectedSlice: {
-            label: '',
-            value: 0,
-            numeroGraficoVerde: 0,
-            numeroGraficoCinza: 0,
-          },
-          labelWidth: 0
-        }
       }
       
-      async componentDidMount() {
-        await new Promise(resolve => {resolve(   this.setState({numeroGraficoVerde: this.props})   )});
-      }
-
     render() {
-        var numGraficVerde = 0;
-        var numGraficCinza = 0;
-        const per = this.props.percentual;
+        var numGraficGreen = 0;
+        var numGraficGrey = 0;
+        const per = this.props.parameter;
         var numberPercentual = parseInt(per); 
         if(numberPercentual <= 100){
-            numGraficVerde = per;
-            numGraficCinza = 100 - numGraficVerde ;    
+            numGraficGreen = per;
+            numGraficGrey = 100 - numGraficGreen - 10 ;    
         }else{
-            numGraficVerde = 100;
-            numGraficCinza = 0;    
+            numGraficGreen = 100;
+            numGraficGrey = 0;    
         }
         const data = [
             {
                 key: 1,
-                amount: numGraficCinza,
-                svg: { fill: '#929292' },   // cinza
+                amount: numGraficGrey,
+                svg: { fill: '#929292' }, 
             },
             {
                 key: 2,
-                amount: numGraficVerde,
-                svg: { fill: '#31AF43' }    // verde
+                amount: numGraficGreen,
+                svg: { fill: '#31AF43' }  
             },
-            // {
-            //     key: 3,
-            //     amount: 40,
-            //     svg: { fill: '#0778B4' }    // azul
-            // },
-            // {
-            //     key: 4,
-            //     amount: 95,
-            //     svg: { fill: '#d966ff' }
-            // },
-            // {
-            //     key: 5,
-            //     amount: 35,
-            //     svg: { fill: '#ecb3ff' }
-            // }
+            {
+                key: 3,
+                amount: 10,
+                svg: { fill: '#FF0000' }   
+            },
         ]
 
         const Labels = ({ slices, height, width }) => {
@@ -92,7 +69,7 @@ class PieCharScreen extends React.PureComponent {
                         spacing={0}
                         outerRadius={'85%'}
                     >
-                        {/* <Labels/> */}
+                        <Labels/>
                     </PieChart>
                     
                     <View style={{ position: 'absolute',  }}>

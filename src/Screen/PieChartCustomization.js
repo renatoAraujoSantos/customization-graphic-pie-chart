@@ -1,34 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View, ImageBackground, ScrollView } from 'react-native';
 import moment from 'moment';
-import { MONTHS } from '../components/model/MonthsAndYears';
-import { JANUARY } from '../components/model/MonthsAndYears';
+import { MONTHS, JANUARY, placeholderM, placeholderY } from '../components/model/MonthsAndYears';
 import RNPickerSelect from 'react-native-picker-select';
 import PieChart from '../components/pie-chart/PieChart'
-import { Icon } from 'react-native-elements';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import CardList from '../components/CardList'
-
-const IMAGE_FUNDO_GRAFICO = require('../../assets/fundoGrafico.png');
-
-const placeholderMes = {
-    label: 'Months...',
-    value: null,
-    color: '#9EA0A4',
-};
-
-const placeholderAnos = {
-    label: 'Years...',
-    value: null,
-    color: '#9EA0A4',
-};
 
 export default function PieChartCustomization() {
 
-    const [years, setYears] = React.useState([]);
-    const [listaMesesCombo, setListaMesesCombo] = React.useState(MONTHS);
-    const [mesSelecionado, setMesSelecionado] = React.useState('1');
-    const [anoSelecionado, setAnoSelecionado] = React.useState('2014');
-    const [percentual, setPercentual] = React.useState(10);
+    const [years, setYears] = React.useState([]);    
+    const [listMonths, setListMonths] = React.useState(MONTHS);
+    const [selectedMonth, setSelectedMonth] = React.useState('1');
+    const [selectedYear, setSelectedYear] = React.useState('2014');
+    const [percentage, setPercentage] = React.useState(60);
 
     React.useEffect(() => {
         async function loadResourcesAndDataAsync() {
@@ -48,12 +33,14 @@ export default function PieChartCustomization() {
     }, []);
 
 
-    const changeMes = (mes) => {
-        setMesSelecionado(mes);
+    const changeM = (m) => {
+        setSelectedMonth(m);
+        //insert your action here
     }
 
-    const changeAno = (ano) => {
-        setMesSelecionado(ano);
+    const changeY = (y) => {
+        setSelectedYear(y);
+        //insert your action here
     }
 
     const listRender = () => {
@@ -71,88 +58,98 @@ export default function PieChartCustomization() {
             <ScrollView>
                 <View style={{ marginTop: 80, alignItems: 'center', backgroundColor: 'transparent', marginHorizontal: 10, borderRadius: 10, flexDirection: 'row', }} >
                     <View style={{ flexDirection: 'row', }}>
-                        <ImageBackground style={{ flex: 1, flexDirection: 'row', }} imageStyle={{ borderRadius: 10 }} source={IMAGE_FUNDO_GRAFICO} >
+                        <ImageBackground style={{ flex: 1, flexDirection: 'row', }} imageStyle={{ borderRadius: 10 }} source={require('../../assets/fundoGrafico.png')} >
                             <View style={{ flex: 0.2, justifyContent: 'space-around', }}>
                                 <View style={{ alignItems: 'center' }}>
-                                    <Text style={{ fontSize: 22, marginLeft: 20, color: 'white', fontWeight: 'bold', }}>
+                                    <Text style={styles.subtitleLeft}>
                                         10
-                                                {/* {this.state.pontos} */}
                                     </Text>
                                 </View>
                                 <View style={{ alignItems: 'center' }}>
                                     <Text style={{ fontSize: 10, marginLeft: 20, color: 'white', }} >
                                         POINTS
-                                </Text>
+                                    </Text>
                                 </View>
                                 <View style={{ alignItems: 'center' }}>
-                                    <Text style={{ fontSize: 22, marginLeft: 20, color: 'white', fontWeight: 'bold', }}>
+                                    <Text style={styles.subtitleLeft}>
                                         20
-                                                {/* {this.state.mediaDiaria} */}
                                     </Text>
                                 </View>
                                 <View style={{ alignItems: 'center' }}>
                                     <Text style={{ fontSize: 10, marginLeft: 20, color: 'white', }} >
                                         AVERAGE
-                                </Text>
+                                    </Text>
                                 </View>
                             </View>
                             <View style={{ flex: 0.6, alignItems: 'center' }}>
                                 <View style={styles.renderCardContainerGrafico} >
-                                    <PieChart percentual={percentual} />
+                                    <PieChart parameter={percentage} />
                                 </View>
                             </View>
                             <View style={{ flex: 0.2, justifyContent: 'space-around', }}>
                                 <View style={{ alignItems: 'center' }}>
                                     <Text style={{ fontSize: 22, marginRight: 20, color: 'white', fontWeight: 'bold', }}>
                                         30
-                                                {/* {this.state.restantes} */}
                                     </Text>
                                 </View>
                                 <View style={{ alignItems: 'center' }}>
                                     <Text style={{ fontSize: 10, marginRight: 10, color: 'white', textAlign: 'center', textAlignVertical: 'center', }} >
                                         REMAINING
-                                </Text>
+                                    </Text>
                                 </View>
                                 <View style={{ alignItems: 'center' }}>
                                     <Text style={{ fontSize: 22, marginRight: 20, color: 'white', fontWeight: 'bold', }}>
                                         22
-                                                {/* {this.state.total} */}
                                     </Text>
                                 </View>
                                 <View style={{ alignItems: 'center' }}>
                                     <Text style={{ fontSize: 10, marginRight: 10, color: 'white', textAlign: 'center', textAlignVertical: 'center', }} >
                                         TOTAL
-                                </Text>
+                                    </Text>
                                 </View>
                             </View>
                         </ImageBackground>
                     </View>
                 </View>
 
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginHorizontal: 30, marginTop: 25 }}>                    
+                    <FontAwesome name="circle" size={10} color="#31AF43" />
+                    <Text style={{ textAlign: 'center', textAlignVertical: 'bottom', fontSize: 10, color: 'gray', marginLeft: 5 }}>
+                        EXECUTED
+                    </Text>
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginHorizontal: 30, marginTop: 1 }}>                    
+                    <FontAwesome name="circle" size={10} color="#929292" />
+                    <Text style={{ textAlign: 'center', textAlignVertical: 'bottom', fontSize: 10, color: 'gray', marginLeft: 5 }}>
+                        REMAINING
+                    </Text>
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginHorizontal: 30, marginTop: 1 }}>                                        
+                    <FontAwesome name="circle" size={10} color="#FF0000" />
+                    <Text style={{ textAlign: 'center', textAlignVertical: 'bottom', fontSize: 10, color: 'gray', marginLeft: 5 }}>
+                        CANCELED
+                    </Text>
+                </View>
+
                 <View style={{ justifyContent: 'center', alignItems: 'center', borderRadius: 0, marginHorizontal: 10, marginTop: 40 }} >
                     <View style={{ flexDirection: 'row', backgroundColor: 'transparent' }}>
-                        <View style={{ flex: 0.2, justifyContent: 'center' }}>
-                            <View style={{ alignItems: 'center', }}>
-                                <Text style={{ fontSize: 17, color: 'gray', fontWeight: 'bold', }}>
-                                    {''}
-                                </Text>
-                            </View>
-                        </View>
-
-                        <View style={{ flex: 0.4, marginLeft: 10, justifyContent: 'center' }}>
+                        <View style={{ flex: 0.6, marginLeft: 30, justifyContent: 'center' }}>
                             <View style={{ alignItems: 'flex-start', }}>
                                 <Text style={{ fontSize: 15, marginTop: 10, marginLeft: 12, color: 'gray', fontWeight: 'bold' }}>MONTHS</Text>
                                 <RNPickerSelect
-                                    placeholder={placeholderMes}
-                                    items={listaMesesCombo}
-                                    onValueChange={value => { changeMes(value) }}
+                                    placeholder={placeholderM}
+                                    items={listMonths}
+                                    onValueChange={value => { changeM(value) }}
                                     style={{
                                         ...pickerSelectStyles,
                                         iconContainer: { top: 10, right: 12, },
                                     }}
-                                    value={mesSelecionado}
+                                    value={selectedMonth}
                                     useNativeAndroidPickerStyle={false}
                                     textInputProps={{ underlineColorAndroid: 'transparent' }}
+                                    Icon={() => {
+                                        return <Ionicons name="md-arrow-down" size={24} color="gray" />;
+                                    }}
                                 />
                             </View>
                         </View>
@@ -161,37 +158,26 @@ export default function PieChartCustomization() {
                             <View style={{ alignItems: 'flex-start', marginRight: 10 }}>
                                 <Text style={{ fontSize: 15, marginTop: 10, marginLeft: 12, color: 'gray', fontWeight: 'bold' }}>YEARS</Text>
                                 <RNPickerSelect
-                                    placeholder={placeholderAnos}
+                                    placeholder={placeholderY}
                                     items={years}
-                                    onValueChange={value => { changeAno(value) }}
+                                    onValueChange={value => { changeY(value) }}
                                     style={{
                                         ...pickerSelectStyles,
                                         iconContainer: { top: 10, right: 12, },
                                     }}
-                                    value={anoSelecionado}
+                                    value={selectedYear}
                                     useNativeAndroidPickerStyle={false}
                                     textInputProps={{ underlineColorAndroid: 'transparent' }}
+                                    Icon={() => {
+                                        return <Ionicons name="md-arrow-down" size={24} color="gray" />;
+                                    }}
                                 />
                             </View>
                         </View>
-
                     </View>
                 </View>
 
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginHorizontal: 30, marginTop: 5 }}>
-                    <Icon name="circle" type="font-awesome" color="#31AF43" size={10} />
-                    <Text style={{ textAlign: 'center', textAlignVertical: 'bottom', fontSize: 10, color: 'gray', marginLeft: 5 }}>
-                        EXECUTED
-                    </Text>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginHorizontal: 30, marginTop: 1 }}>
-                    <Icon name="circle" type="font-awesome" color="#929292" size={10} />
-                    <Text style={{ textAlign: 'center', textAlignVertical: 'bottom', fontSize: 10, color: 'gray', marginLeft: 5 }}>
-                        REMAINING
-                    </Text>
-                </View>
-
-                <View style={{ justifyContent: 'center', alignItems: 'center', borderRadius: 0, marginHorizontal: 10 }} >
+                <View style={{ justifyContent: 'center', alignItems: 'center', borderRadius: 0, marginHorizontal: 10, marginTop: 20 }} >
                     <View style={{ flexDirection: 'row', backgroundColor: '#0778B4' }}>
                         <View style={{ flex: 0.3, justifyContent: 'center' }}>
                             <View style={{ alignItems: 'center', }}>
@@ -217,7 +203,6 @@ export default function PieChartCustomization() {
                     </View>
                     {listRender()}
                 </View>
-
             </ScrollView>
         </View>
     );
@@ -236,9 +221,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    subtitleLeft: {
+        fontSize: 22, 
+        marginLeft: 20, 
+        color: 'white', 
+        fontWeight: 'bold'
+    }
 
 });
-
 
 const pickerSelectStyles = StyleSheet.create({
     inputIOS: {
@@ -246,25 +236,23 @@ const pickerSelectStyles = StyleSheet.create({
         paddingVertical: 5,
         paddingHorizontal: 10,
         borderWidth: 2,
-        borderColor: 'transparent',
+        borderColor: 'gray',
         borderRadius: 4,
         color: '#0778B4',
         fontWeight: 'bold',
         paddingRight: 30, // para garantir que o texto nunca fique atrás do ícone
-        width: 130,
-        backgroundColor: 'transparent'
+        width: 130,        
     },
     inputAndroid: {
         fontSize: 20,
         paddingHorizontal: 10,
         paddingVertical: 5,
         borderWidth: 2,
-        borderColor: 'transparent',
+        borderColor: 'gray',
         borderRadius: 8,
         color: '#0778B4',
         fontWeight: 'bold',
         paddingRight: 30, // para garantir que o texto nunca fique atrás do ícone
-        width: 130,
-        backgroundColor: 'transparent'
+        width: 130,        
     },
 });

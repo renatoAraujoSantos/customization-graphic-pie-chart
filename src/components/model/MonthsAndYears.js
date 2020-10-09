@@ -51,11 +51,23 @@ export const MONTHS = [
 
 
 export const JANUARY = [
-    {rowNum: 1, dataBaixa: "22/01/2020", meta: "200", qtdContratos: 3, qtdPontos: 5},
-    {rowNum: 2, dataBaixa: "23/01/2020", meta: "200", qtdContratos: 5, qtdPontos: 8},
-    {rowNum: 3, dataBaixa: "24/01/2020", meta: "200", qtdContratos: 4, qtdPontos: 5},
-    {rowNum: 4, dataBaixa: "25/01/2020", meta: "200", qtdContratos: 6, qtdPontos: 9},
-    {rowNum: 5, dataBaixa: "27/01/2020", meta: "200", qtdContratos: 5, qtdPontos: 6},
-    {rowNum: 6, dataBaixa: "28/01/2020", meta: "200", qtdContratos: 3, qtdPontos: 7},
-    {rowNum: 7, dataBaixa: "29/01/2020", meta: "200", qtdContratos: 7, qtdPontos: 8}
+    {rowNum: 1, dateLow: "22/01/2020", meta: "200", qtdContracts: 3, qtdPoints: 5, color:'#ECECEC'},
+    {rowNum: 2, dateLow: "23/01/2020", meta: "200", qtdContracts: 5, qtdPoints: 8, color:'#FFFFFF'},
+    {rowNum: 3, dateLow: "24/01/2020", meta: "200", qtdContracts: 4, qtdPoints: 5, color:'#ECECEC'},
+    {rowNum: 4, dateLow: "25/01/2020", meta: "200", qtdContracts: 6, qtdPoints: 9, color:'#FFFFFF'},
+    {rowNum: 5, dateLow: "27/01/2020", meta: "200", qtdContracts: 5, qtdPoints: 6, color:'#ECECEC'},
+    {rowNum: 6, dateLow: "28/01/2020", meta: "200", qtdContracts: 3, qtdPoints: 7, color:'#FFFFFF'},
+    {rowNum: 7, dateLow: "29/01/2020", meta: "200", qtdContracts: 7, qtdPoints: 8, color:'#ECECEC'}
 ]
+
+export const placeholderM = {
+    label: 'Months...',
+    value: null,
+    color: '#9EA0A4',
+};
+
+export const placeholderY = {
+    label: 'Years...',
+    value: null,
+    color: '#9EA0A4',
+};
