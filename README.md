@@ -15,4 +15,4 @@ Email-me: renato.colossus@gmail.com
 
 Connect with me at [LinkedIn](https://www.linkedin.com/in/renato-santos-3486a724/).
 
-Also, you can use this Project as you wish!
+Also, you can use this example as you wish!
