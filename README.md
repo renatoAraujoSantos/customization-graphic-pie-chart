@@ -1,5 +1,5 @@
 # customization-graphic-pie-chart
-![smiley](./assets/smiley.png)
+![graficPieChartCustomization1](./assets/graficPieChartCustomization1.png)
 
 ## About this Project
 
