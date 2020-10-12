@@ -9,7 +9,7 @@ _"Share knowledge in the form of podcasts, providing a simple way to learn"._
 
 ## Why?
 
-This project is part of my personal portfolio, so, I'll be happy if you could provide me any feedback about the project, code, structure or anything that you can report that could make me a better developer!
+This example is part of my personal portfolio, so I would be happy if you could provide me with any feedback on the screen, code, structure or anything you can report that could make me a better developer!
 
 Email-me: renato.colossus@gmail.com
 
