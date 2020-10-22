@@ -1,5 +1,6 @@
 # customization-graphic-pie-chart
-![graficPieChartCustomization1](./assets/graficPieChartCustomization1.png)
+
+![Demo Animation](./assets/graficAnimation.gif?raw=true)
 
 ## About this Project
 

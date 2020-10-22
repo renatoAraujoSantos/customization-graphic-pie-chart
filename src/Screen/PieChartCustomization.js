@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, ImageBackground, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, ScrollView, Alert } from 'react-native';
 import moment from 'moment';
-import { MONTHS, JANUARY, placeholderM, placeholderY } from '../components/model/MonthsAndYears';
+import { MONTHS, placeholderM, placeholderY, data } from '../components/model/MonthsAndYears';
 import RNPickerSelect from 'react-native-picker-select';
 import PieChart from '../components/pie-chart/PieChart'
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
@@ -9,11 +9,18 @@ import CardList from '../components/CardList'
 
 export default function PieChartCustomization() {
 
+    const initialState = data[0];
+
     const [years, setYears] = React.useState([]);    
     const [listMonths, setListMonths] = React.useState(MONTHS);
     const [selectedMonth, setSelectedMonth] = React.useState('1');
-    const [selectedYear, setSelectedYear] = React.useState('2014');
-    const [percentage, setPercentage] = React.useState(60);
+    const [selectedYear, setSelectedYear] = React.useState('2020');
+    const [percentage, setPercentage] = React.useState(initialState.percentage);
+    const [listData, setListData] = React.useState(initialState.values);
+    const [points, setPoints] = React.useState(initialState.points);
+    const [average, setAverage] = React.useState(initialState.average);
+    const [remaining, setRemaining] = React.useState(initialState.remaining);
+    const [total, setTotal] = React.useState(initialState.total);
 
     React.useEffect(() => {
         async function loadResourcesAndDataAsync() {
@@ -33,9 +40,21 @@ export default function PieChartCustomization() {
     }, []);
 
 
-    const changeM = (m) => {
-        setSelectedMonth(m);
-        //insert your action here
+    const changeM = async (m) => {
+        setSelectedMonth(m);        
+        let listFilter = null;
+        listFilter = data.filter(item => item.nr === m);          
+        if(listFilter.length <= 0){
+            Alert.alert('No results', 'select another month');
+            return;
+        }
+        const ls = listFilter[0];     
+        setListData(ls.values);        
+        setPoints(ls.points);
+        setAverage(ls.average);
+        setRemaining(ls.remaining);
+        setTotal(ls.total);
+        setPercentage(ls.percentage);        
     }
 
     const changeY = (y) => {
@@ -45,7 +64,7 @@ export default function PieChartCustomization() {
 
     const listRender = () => {
         var result = null;
-        result = JANUARY.map((item, index) => {
+        result = listData.map((item, index) => {
             return (
                 <CardList props={item} key={item.rowNum} />
             )
@@ -62,7 +81,7 @@ export default function PieChartCustomization() {
                             <View style={{ flex: 0.2, justifyContent: 'space-around', }}>
                                 <View style={{ alignItems: 'center' }}>
                                     <Text style={styles.subtitleLeft}>
-                                        10
+                                        {points}
                                     </Text>
                                 </View>
                                 <View style={{ alignItems: 'center' }}>
@@ -72,7 +91,7 @@ export default function PieChartCustomization() {
                                 </View>
                                 <View style={{ alignItems: 'center' }}>
                                     <Text style={styles.subtitleLeft}>
-                                        20
+                                        {average}
                                     </Text>
                                 </View>
                                 <View style={{ alignItems: 'center' }}>
@@ -89,7 +108,7 @@ export default function PieChartCustomization() {
                             <View style={{ flex: 0.2, justifyContent: 'space-around', }}>
                                 <View style={{ alignItems: 'center' }}>
                                     <Text style={{ fontSize: 22, marginRight: 20, color: 'white', fontWeight: 'bold', }}>
-                                        30
+                                        {remaining}
                                     </Text>
                                 </View>
                                 <View style={{ alignItems: 'center' }}>
@@ -99,7 +118,7 @@ export default function PieChartCustomization() {
                                 </View>
                                 <View style={{ alignItems: 'center' }}>
                                     <Text style={{ fontSize: 22, marginRight: 20, color: 'white', fontWeight: 'bold', }}>
-                                        22
+                                        {total}
                                     </Text>
                                 </View>
                                 <View style={{ alignItems: 'center' }}>
